@@ -1,3 +1,0 @@
-- Kitti U. \<kittiu@ecosoft.co.th\>
-- [Niboo](https://www.niboo.com):
-  - Simon Falesse \<<sfa@niboo.com>\>
