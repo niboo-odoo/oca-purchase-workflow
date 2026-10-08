@@ -71,7 +71,7 @@ class PurchaseOrder(models.Model):
                 result["res_id"] = self.wa_ids.id or False
         return result
 
-    def action_create_invoice(self):
+    def action_create_invoice(self, attachment_ids=False):
         enable_wa = self.env.user.has_group(
             "purchase_work_acceptance.group_enable_wa_on_invoice"
         )
@@ -89,7 +89,7 @@ class PurchaseOrder(models.Model):
                 "view_id": wizard.id,
                 "target": "new",
             }
-        res = super().action_create_invoice()
+        res = super().action_create_invoice(attachment_ids=attachment_ids)
         # Set 'ref' to WA
         if (
             ctx.get("wa_id")
@@ -151,14 +151,14 @@ class PurchaseOrderLine(models.Model):
         string="Accepted Qty.",
         store=True,
         readonly=True,
-        digits="Product Unit of Measure",
+        digits="Product Unit",
     )
     qty_to_accept = fields.Float(
         compute="_compute_qty_accepted",
         string="To Accept Qty.",
         store=True,
         readonly=True,
-        digits="Product Unit of Measure",
+        digits="Product Unit",
     )
 
     def _get_product_qty(self):
